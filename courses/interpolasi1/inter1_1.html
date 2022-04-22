@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Interpolasi - Bisa Numerik</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../assets/niceadmin/img/favicon.png" rel="icon">
+  <link href="../../assets/niceadmin/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+  <!-- Vendor CSS Files -->
+  <link href="../../assets/niceadmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../../assets/niceadmin/css/style.css" rel="stylesheet">
+
+  <!-- MathJax -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+	</script>
+
+	<!-- Vendorjs -->
+	<script src="../../assets/svgjs/svg.min.js"></script>
+	<script src="../../assets/mathjs/math.js"></script>
+	<script src="../../assets/decimaljs/decimal.js"></script>
+
+	<!-- KaTex -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+	onload=""></script>
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body onload="initBody()">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="../../assets/niceadmin/img/logo.png" alt="">
+        <span class="d-none d-lg-block">Bisa Numerik</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+		<img src="sideimg.png" width="100%"></img>
+		<span class="h3">Interpolasi</span>
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>Pendahuluan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="inter1_1.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Linear</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="inter1_2.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Kuadrat</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="inter1_3.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Selisih-Bagi Newton</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="inter1_4.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Pada Titik Yang Berjarak Sama</span>
+        </a>
+      </li>
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Interpolasi Linear</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Interpolasi</a></li>
+          <li class="breadcrumb-item active">Interpolasi Linear</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <div class="content" >
+
+			<p>Interpolasi linear merupakan interpolasi yang menggunakan garis lurus melalui dua titik \((x_0,f_0 ),(x_1,f_1)\). Interpolasi ini digunakan untuk mendapatkan nilai di antara dua data yang berdasarkan persamaan linear.</p>
+
+			<p>Coba hubungkan titik A dan titik B di bawah ini</p>
+
+			<center><div class="drawing" id="drawing">
+				<div id="map-catcher"></div>
+			</div>
+			<button class="btn btn-secondary" onclick="reSlide('#drawing')"><i class="bi bi-arrow-clockwise"></i></button>
+			</center>
+
+			<p>Berdasarkan grafik linear tersebut, kita dapat menentukan persamaan linear tersebut dari rumus \(\frac{y-y_1}{y_2-y_1}=\frac{x-x_1}{x_2-x_1}\)</p>
+
+			<center><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+
+			<p>Substitusikan \(x,x_0,x_1,f,f_0,f_1\) ke \(x,x_1,x_2,y,y_1,y_2\) secara berurutan.</p>
+
+			\[\frac{f-f_0}{f_1-f_0}=\frac{x-x_0}{x_1-x_0}\]
+			\[f-f_0=\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
+			\[f=f_0+\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
+
+			<p>\(f\) adalah polinom berderajat satu sehingga bisa dinotasikan sebagai \(p_1 (x)\). Dengan \(f[x_0,x_1]\) adalah beda terbagi pertama yang didefinisikan sebagai berikut</p>
+
+			\[f[x_0,x_1 ]=\frac{f_1-f_0}{x_1-x_0}\]
+
+			<p>Sehingga persamaan sebelumnya bisa ditulis ulang menjadi</p>
+
+			\[p_1 (x)=f_0+(x-x_0 )f[x_0,x_1 ]\]
+
+			<br/>
+
+			<center><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+
+    </div>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Bisa Numerik</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      NiceAdmin Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <!-- <script src="../../assets/niceadmin/vendor/apexcharts/apexcharts.min.js"></script> -->
+  <script src="../../assets/niceadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/niceadmin/vendor/chart.js/chart.min.js"></script>
+  <script src="../../assets/niceadmin/vendor/echarts/echarts.min.js"></script>
+  <script src="../../assets/niceadmin/vendor/quill/quill.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../../assets/niceadmin/js/main.js"></script>
+  <script src="../../assets/js/svg-intersections.js"></script>
+  <script src="../../assets/js/draw.js"></script>
+  <script src="slides/inter1_1.js"></script>
+
+</body>
+
+</html>
