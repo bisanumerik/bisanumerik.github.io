@@ -24,6 +24,11 @@ function initBody(){
 
 }
 
+function showHidden(x){
+	x.style.display = "none";
+	document.querySelector("#hid"+x.id.slice(-1)).style.display = "block";
+}
+
 ["mousedown","touchstart"].forEach(function(evt){
 	document.querySelector("#map-catcher").addEventListener(evt,function (e) {
 		e.preventDefault();

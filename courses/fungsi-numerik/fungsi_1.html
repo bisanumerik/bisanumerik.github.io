@@ -16,8 +16,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
-
 
   <!-- Vendor CSS Files -->
   <link href="../../assets/niceadmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +24,14 @@
   <link href="../../assets/niceadmin/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="../../assets/niceadmin/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../../assets/niceadmin/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../assets/niceadmin/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <link href="../../assets/css/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="../../assets/niceadmin/css/style.css" rel="stylesheet">
 
-  <!-- MathJax -->
+      <!-- MathJax -->
   <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
 	</script>
@@ -42,12 +41,6 @@
 	<script src="../../assets/mathjs/math.js"></script>
 	<script src="../../assets/decimaljs/decimal.js"></script>
 
-	<!-- KaTex -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
-	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
-	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
-	onload=""></script>
-
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -56,13 +49,13 @@
   ======================================================== -->
 </head>
 
-<body onload="initBody()">
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="../index.html" class="logo d-flex align-items-center">
         <img src="../../assets/niceadmin/img/logo.png" alt="">
         <span class="d-none d-lg-block">Bisa Numerik</span>
       </a>
@@ -75,7 +68,7 @@
   <aside id="sidebar" class="sidebar">
 
 		<img src="sideimg.png" width="100%"></img>
-		<span class="h3">Interpolasi</span>
+		<span class="h3">Penghampiran Fungsi</span>
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -87,30 +80,30 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="inter1_1.html">
+        <a class="nav-link" href="fungsi_1.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Linear</span>
+          <span>Regresi Linear</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_2.html">
+        <a class="nav-link collapsed" href="fungsi_2.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Kuadrat</span>
+          <span>Regresi Polinom</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_3.html">
+        <a class="nav-link collapsed" href="fungsi_3.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Selisih-Bagi Newton</span>
+          <span>Penghampiran Minimaks</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_4.html">
+        <a class="nav-link collapsed" href="fungsi_4.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Pada Titik Yang Berjarak Sama</span>
+          <span>Polinom Chebyshev</span>
         </a>
       </li>
 
@@ -122,50 +115,52 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Interpolasi Linear</h1>
+      <h1>Regresi Linear</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Interpolasi</a></li>
-          <li class="breadcrumb-item active">Interpolasi Linear</li>
+          <li class="breadcrumb-item"><a href="index.html">Penghampiran Fungsi</a></li>
+          <li class="breadcrumb-item active">Regresi Linear</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <div class="content" >
+    <div class="content">
 
-			<p>Interpolasi linear merupakan interpolasi yang menggunakan garis lurus melalui dua titik \((x_0,f_0 ),(x_1,f_1)\). Interpolasi ini digunakan untuk mendapatkan nilai di antara dua data yang berdasarkan persamaan linear.</p>
+		<p>Andaikan kita ingin mencari suatu fungsi linear yang mencocoki data dengan simpangan sekecil mungkin, fungsi linear yang ditentukan menggunakan cara regresi linear.</p>
 
-			<p>Coba hubungkan titik A dan titik B di bawah ini</p>
+		<p>Fungsi linear dapat dinyatakan dengan</p>
 
-			<center><div class="drawing" id="drawing">
-				<div id="map-catcher"></div>
-			</div>
-			<button class="btn btn-secondary" onclick="reSlide('#drawing')"><i class="bi bi-arrow-clockwise"></i></button>
-			</center>
+		\[
+			g(x)=a+bx
+		\]
 
-			<p>Berdasarkan grafik linear tersebut, kita dapat menentukan persamaan linear tersebut dari rumus \(\frac{y-y_1}{y_2-y_1}=\frac{x-x_1}{x_2-x_1}\)</p>
+		<p>Dengan \(a\) dan \(b\) konstanta yang akan ditentukan. Simpangan garis dari masing-masing titik data didefinisikan oleh</p>
 
-			<center><button type="button" id="btn-hid1" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+		\[
+			d_i=y_i-g(x_i )=y_i-(a+bx_i ), i=1,2,…,L
+		\]
 
-			<div id="hid1" class="hidden">
-			<p>Substitusikan \(x,x_0,x_1,f,f_0,f_1\) ke \(x,x_1,x_2,y,y_1,y_2\) secara berurutan.</p>
+		<p>Dengan \(L\) banyaknya titik data, dalam kasus ini 5. Total kuadrat simpangan:</p>
 
-			\[\frac{f-f_0}{f_1-f_0}=\frac{x-x_0}{x_1-x_0}\]
-			\[f-f_0=\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
-			\[f=f_0+\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
+		\[
+			D=\sum_{i=1}^{L}(d_i )^2 =\sum_{i=1}^{L}(y_i-a-bx_i)
+		\]
 
-			<p>\(f\) adalah polinom berderajat satu sehingga bisa dinotasikan sebagai \(p_1 (x)\). Dengan \(f[x_0,x_1]\) adalah beda terbagi pertama yang didefinisikan sebagai berikut</p>
+		<p>Akan dicari \(a\) dan \(b\) sedemikian sehingga \(D\) sekecil mungkin. Nilai minimum untuk \(D\) terjadi jika turunan-turunan parsial \(D\) terhadap \(a\) dan \(b\) menjadi nol</p>
 
-			\[f[x_0,x_1 ]=\frac{f_1-f_0}{x_1-x_0}\]
+		\[
+			\frac{\partial{D}}{\partial{a}}=-2\sum_{i=1}^{L}(y_i-a-bx_i ) =0
+		\]
 
-			<p>Sehingga persamaan sebelumnya bisa ditulis ulang menjadi</p>
+		\[
+			\frac{\partial{D}}{\partial{b}}=-2\sum_{i=1}^{L}x_i(y_i-a-bx_i ) =0
+		\]
 
-			\[p_1 (x)=f_0+(x-x_0 )f[x_0,x_1 ]\]
+		<p>dan setelah dibagi \(-2\)</p>
 
-			<br/>
-
-			<center><a href="inter1_2.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></a></center>
-			</div>
+		\[
+			\sum{y_i-a-bx_i }=0\Rightarrow \sum{y_i}-La-\sum{bx_i}=0\Rightarrow La+\sum{bx_i}=\sum{y_i}
+		\]
 
     </div>
 
@@ -188,17 +183,20 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <!-- <script src="../../assets/niceadmin/vendor/apexcharts/apexcharts.min.js"></script> -->
+  <script src="../../assets/niceadmin/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../../assets/niceadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/niceadmin/vendor/chart.js/chart.min.js"></script>
   <script src="../../assets/niceadmin/vendor/echarts/echarts.min.js"></script>
   <script src="../../assets/niceadmin/vendor/quill/quill.min.js"></script>
+  <script src="../../assets/niceadmin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../../assets/niceadmin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../../assets/niceadmin/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../../assets/niceadmin/js/main.js"></script>
-  <script src="../../assets/js/svg-intersections.js"></script>
+	<script src="../../assets/js/svg-intersections.js"></script>
   <script src="../../assets/js/draw.js"></script>
-  <script src="slides/inter1_1.js"></script>
+  <script src="slides/inter2_2.js"></script>
 
 </body>
 

@@ -24,10 +24,22 @@
   <link href="../../assets/niceadmin/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="../../assets/niceadmin/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../../assets/niceadmin/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../../assets/niceadmin/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
   <link href="../../assets/niceadmin/css/style.css" rel="stylesheet">
+
+    <!-- MathJax -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+	</script>
+
+	<!-- Vendorjs -->
+	<script src="../../assets/svgjs/svg.min.js"></script>
+	<script src="../../assets/mathjs/math.js"></script>
+	<script src="../../assets/decimaljs/decimal.js"></script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
@@ -43,7 +55,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="../index.html" class="logo d-flex align-items-center">
         <img src="../../assets/niceadmin/img/logo.png" alt="">
         <span class="d-none d-lg-block">Bisa Numerik</span>
       </a>
@@ -56,42 +68,35 @@
   <aside id="sidebar" class="sidebar">
 
 		<img src="sideimg.png" width="100%"></img>
-		<span class="h3">Interpolasi</span>
+		<span class="h3">Penghampiran Turunan</span>
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
         <a class="nav-link " href="index.html">
           <i class="bi bi-grid"></i>
-          <span>Pendahuluan</span>
+          <span>Penghampiran Turunan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_1.html">
+        <a class="nav-link collapsed" href="turunan_1.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Linear</span>
+          <span>Penurunan Rumus</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_2.html">
+        <a class="nav-link collapsed" href="turunan_2.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Kuadrat</span>
+          <span>Rumus-Rumus</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_3.html">
+        <a class="nav-link collapsed" href="turunan_3.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Selisih-Bagi Newton</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="inter1_4.html">
-          <i class="bi bi-grid"></i>
-          <span>Interpolasi Pada Titik Yang Berjarak Sama</span>
+          <span>Quiz</span>
         </a>
       </li>
 
@@ -103,17 +108,47 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Pendahuluan</h1>
+      <h1>Penghampiran Turunan</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Interpolasi</a></li>
-          <li class="breadcrumb-item active">Pendahuluan</li>
+          <li class="breadcrumb-item"><a href="index.html">Penghampiran Turunan</a></li>
+          <li class="breadcrumb-item active">Penghampiran Turunan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <div>
-			<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+    <div class="content">
+
+    <p>Penghampiran turunan \(f(x)\) menggunakan limit dari hasil bagi</p>
+
+    \[
+		f(x)=\lim_{h\to0} \frac{f(x+h)-f(x)}{h}
+    \]
+
+    <p>Dari fungsi tersebut bisa kita lihat bahwa nilai h mendekati nol, sehingga bisa kita langsung masukkan nilai h yang mendekati nol seperti \(0,1; 0,01; 0,001; ...\)</p>
+
+    <p>Dalam menurunkan suatu fungsi secara numerik, terdapat tiga pendekatan yang bisa digunakan</p>
+
+    <p>1. Hampiran selisih-maju</p>
+
+    <center><img src="./slides/turunan_0_0.png"></img></center>
+
+    \[f^{'}(x)=\frac{f(x+h)-f(x)}{h}\]
+
+    <p>2. Hampiran selisih-mundur</p>
+
+    <center><img src="./slides/turunan_0_1.png"></img></center>
+
+    \[f^{'}(x)=\frac{f(x)-f(x-h)}{h}\]
+
+    <p>3. Hampiran selisih-pusat</p>
+
+    <center><img src="./slides/turunan_0_2.png"></img></center>
+
+    \[f^{'}(x)=\frac{f(x+h)-f(x-h)}{2h}\]
+
+    <center><a href="turunan_1.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></a></center>
+
     </div>
 
   </main><!-- End #main -->
@@ -146,6 +181,9 @@
 
   <!-- Template Main JS File -->
   <script src="../../assets/niceadmin/js/main.js"></script>
+    <script src="../../assets/js/svg-intersections.js"></script>
+  <script src="../../assets/js/draw.js"></script>
+  <script src="slides/inter2_2.js"></script>
 
 </body>
 

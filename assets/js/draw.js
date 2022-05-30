@@ -9,8 +9,11 @@ var fxLine = [];
 var drawCapt = [];
 var tXt = [];
 var line = [];
+var polyLine = [];
 var rectChoise = [];
 var points = [];
+var thePlot = [];
+var lineFx = [];
 
 //Boundaries
 var Xbound = [];
@@ -36,12 +39,21 @@ function init_draw(selector, fX, Xb, Yb, capt = ""){
 	theFx[selector]=fX;
 	tXt[selector] = [];
 	points[selector] = [];
+	lineFx[selector]=[];
 	if(capt!="") drawCapt[selector] = document.querySelector(capt);
 }
 
 //Function
 function fx(selector,x){
 	return math.evaluate(theFx[selector],{x:x});
+}
+
+function retFx(inFx,x){
+	return math.evaluate(inFx,{x:x});
+}
+
+function setFx(selector,fn){
+	theFx[selector] = fn;
 }
 
 //draw X-coordinate line
@@ -51,12 +63,12 @@ function drawXLine(selector, ite,  withNumber = true, withLine = true){
 	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
 	let modder = 1;
 	for(let i = Xbound[selector][0]; i <= Xbound[selector][1]; i= Number(Decimal.add(i,ite).valueOf())){
-		if(withLine) textMarker.push(draw[selector].line(width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector])-5, width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector])+5).stroke({color:"#aaa", width: 2}));
-		if(withNumber) textX.push(draw[selector].text(i).move(width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector]) + 5 - (modder*30)).font({fill: "#000", family: "Quicksand"}).translate(-3,0));
+		if(withLine) textMarker.push(draw[selector].line(width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector])-5, width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector])+5).stroke({color:"#aaa", width: 2}));
+		if(withNumber) textX.push(draw[selector].text(i).move(width[selector]*((i+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]) + 5 - (modder*30)).font({fill: "#000", family: "Quicksand"}).translate(-3,0));
 		modder = (modder+1)%2;
 	}
 
-	lineX = draw[selector].line(0, height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector]), width[selector], height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector])).stroke({color:"#000",width:2});
+	lineX = draw[selector].line(0, height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]), width[selector], height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector])).stroke({color:"#000",width:2});
 }
 
 //draw Y-coordinate line
@@ -66,11 +78,13 @@ function drawYLine(selector, ite, withNumber = true, withLine = true){
 	let textMarker = [];
 	for(let i = Math.ceil(Ybound[selector][0]); i <= Ybound[selector][1]; i= Number(Decimal.add(i,ite).valueOf())){
 		if(i==0)continue;
-		if(withLine) textMarker.push(draw[selector].line(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector])-5, height[selector]*((i+Math.abs(Ybound[selector][0]))/Ylength[selector]), width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector])+5, height[selector]*((i+Math.abs(Ybound[selector][0]))/Ylength[selector])).stroke({color:"#aaa", width: 2}));
-		if(withNumber) textY.push(draw[selector].text(i).move(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]) + 5, height[selector]*((i+Math.abs(Ybound[selector][0]))/Ylength[selector])).font({fill: "#000", family: "Quicksand"}));
+		if(withLine) textMarker.push(draw[selector].line(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector])-5, height[selector]*((Math.abs(Ybound[selector][1])-i)/Ylength[selector]), width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector])+5, height[selector]*((Math.abs(Ybound[selector][1])-i)/Ylength[selector])).stroke({color:"#aaa", width: 2}));
+		if(withNumber) textY.push(draw[selector].text(i).move(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]) + 5, height[selector]*((Math.abs(Ybound[selector][1])-i)/Ylength[selector])).font({fill: "#000", family: "Quicksand"}));
 
-		lineY = draw[selector].line(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]), 0, width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]), height[selector]).stroke({color:"#000",width:2});
+
 	}
+
+	lineY = draw[selector].line(width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]), 0, width[selector]*(Math.abs(Xbound[selector][0])/Xlength[selector]), height[selector]).stroke({color:"#000",width:2});
 }
 
 //Draw Function
@@ -78,13 +92,34 @@ function drawFunction(selector, withAnim = false, dur = 300){
 	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
 	let fxPath = [];
 	for(let i = Xbound[selector][0]; i <= Xbound[selector][1]; i += (Xlength[selector]/width[selector])){
-		if((-fx(selector,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector]))<0 || (-fx(selector,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][0])/Ylength[selector]))>height[selector]) continue;
-		fxPath.push([(i*(width[selector]/Xlength[selector]))+(width[selector]*(x1/Xlength[selector])),-fx(selector,i)*(height[selector]/Ylength[selector])+(height[selector]/2)]);
+		if((-fx(selector,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))<-20 || (-fx(selector,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))>height[selector]+20) continue;
+		fxPath.push([(i*(width[selector]/Xlength[selector]))+(width[selector]*(x1/Xlength[selector])),-fx(selector,i)*(height[selector]/Ylength[selector])+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))]);
 	}
-	fxLine[selector] = draw[selector].polyline(fxPath).fill("none").stroke({color: "#f06", width:3, linecap:"round", linejoin:"round"}).css("stroke-dasharray",700);
-	if(!withAnim)return;
-	fxLine[selector].css("stroke-dashoffset",700);
-	fxLine[selector].animate(dur).css("stroke-dashoffset",0);
+
+	if(!withAnim){
+		fxLine[selector] = draw[selector].polyline(fxPath).fill("none").stroke({color: "#f06", width:3, linecap:"round", linejoin:"round"});
+	}else{
+		fxLine[selector] = draw[selector].polyline(fxPath).fill("none").stroke({color: "#f06", width:3, linecap:"round", linejoin:"round"}).css("stroke-dasharray",700);
+		fxLine[selector].css("stroke-dashoffset",700);
+		fxLine[selector].animate(dur).css("stroke-dashoffset",0);
+	}
+}
+
+//Draw Function
+function drawFunction2(selector,name,ffx, left, right, withAnim = false, dur = 300){
+	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
+	let fxPath = [];
+	for(let i = left; i <= right; i += (Xlength[selector]/width[selector])){
+		if((-retFx(ffx,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))<-20 || (-retFx(ffx,i)*(height[selector]/Ylength[selector]))+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))>height[selector]+20) continue;
+		fxPath.push([(i*(width[selector]/Xlength[selector]))+(width[selector]*(x1/Xlength[selector])),-retFx(ffx,i)*(height[selector]/Ylength[selector])+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))]);
+	}
+	if(!withAnim){
+		lineFx[selector][name] = draw[selector].polyline(fxPath).fill("none").stroke({color: "#f06", width:3, linecap:"round", linejoin:"round"});
+	}else{
+		lineFx[selector][name] = draw[selector].polyline(fxPath).fill("none").stroke({color: "#f06", width:3, linecap:"round", linejoin:"round"}).css("stroke-dasharray",700);
+		lineFx[selector][name].css("stroke-dashoffset",700);
+		lineFx[selector][name].animate(dur).css("stroke-dashoffset",0);
+	}
 }
 
 //Draw Rect Choises
@@ -133,13 +168,14 @@ function drawWrongChoise(selector){
 //Draw Text
 function drawText(selector, txt, x, y){
 	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
-	tXt[selector].push(draw[selector].text(txt).move(width[selector]*((x+x1)/Xlength[selector]), height[selector]*(Math.abs(y+Ybound[selector][0])/Ylength[selector]) + 5).font({fill: "#000", family: "Quicksand"}).translate(-3,0));
+	tXt[selector].push(draw[selector].text(txt).move(width[selector]*((x+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][1]-y)/Ylength[selector]) + 5).font({fill: "#000", family: "Quicksand"}).translate(-3,0));
 }
 
 //Init DrawLine
 
 function initDrawLine(selector){
 	line[selector] = [];
+	polyLine[selector] = [];
 }
 
 //Draw Line
@@ -160,8 +196,17 @@ function deleteLine(selector, name){
 
 function drawPoint(selector,name, x, y){
 	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
-	points[selector][name] = draw[selector].circle(10).center(width[selector]*((x+x1)/Xlength[selector]), height[selector]*(Math.abs(y+Ybound[selector][0])/Ylength[selector])).fill("#04f");
+	points[selector][name] = draw[selector].circle(10).center(width[selector]*((x+x1)/Xlength[selector]), height[selector]*(Math.abs(Ybound[selector][1]-y)/Ylength[selector])).fill("#04f");
 	//.stroke({color: "#04f", width:10, linecap:"round",linejoin:"round"});
+}
+
+function drawPolyLine(selector, name, plot = []){
+	let x1 = (Xbound[selector][0]<0)?Math.abs(Xbound[selector][0]):(-Math.abs(Xbound[selector][0]));
+	let linePath = [];
+	for(let i = 0; i < plot.length; i++){
+		linePath.push([(plot[i][0]*(width[selector]/Xlength[selector]))+(width[selector]*(x1/Xlength[selector])),-plot[i][1]*(height[selector]/Ylength[selector])+(height[selector]*(Math.abs(Ybound[selector][1])/Ylength[selector]))]);
+	}
+	polyLine[selector][name] = draw[selector].polyline(linePath).fill("none").stroke({color: "#f06", width:3, linecap:"round",linejoin:"round"});
 }
 
 function intersectRect(r1, r2) {

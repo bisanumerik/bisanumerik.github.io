@@ -80,7 +80,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link  collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Interpolasi Lagrange</span>
         </a>
@@ -94,7 +94,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter2_2.html">
+        <a class="nav-link" href="inter2_2.html">
           <i class="bi bi-grid"></i>
           <span>Interpolasi Spline</span>
         </a>
@@ -107,132 +107,67 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Interpolasi Lagrange</h1>
+      <h1>Interpolasi Spline</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Interpolasi Lanjutan</a></li>
-          <li class="breadcrumb-item active">Interpolasi Lagrange</li>
+          <li class="breadcrumb-item active">Interpolasi Spline</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <div class="content" >
 
-			<p>Dalam memahami persamaan interpolasi Lagrange, kita ulas kembali persamaan polinom linear</p>
+			<p>Pada beberapa persoalan penginterpolasian, kurva hasil interpolasi terkadang memiliki galat yang terlalu jauh.</p>
 
-			\[p_1 (x)=f_0+\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
-			diurutkan,
-			\[p_1 (x)=f_0+(f_1-f_0)\frac{x-x_0}{x_1-x_0}\]
-			\[p_1 (x)=f_0 (1)+(f_1-f_0 )  \frac{x-x_0}{x_1-x_0}\]
-			substitusi 1 dengan penyebut disebelahnya
-			\[p_1 (x)=f_0\frac{x_1-x_0}{x_1-x_0}+(f_1-f_0 )  \frac{x-x_0}{x_1-x_0}\]
-			asosiasi
-			\[p_1 (x)=f_0 (\frac{x_1-x_0}{x_1-x_0}-\frac{x-x_0}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			\[p_1 (x)=f_0 (\frac{x_1-x_0-x+x_0}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			\[p_1 (x)=f_0 (\frac{x_1-x}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			kalikan dengan \(\frac{-1}{-1}\)
-			\[p_1 (x)=f_0 (\frac{x_1-x}{x_1-x_0 }*\frac{-1}{-1})+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			sehingga didapatkan
-			\[p_1 (x)=f_0 (\frac{x-x_1}{x_0-x_1 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-
-			<center><button type="button" id="btn-hid1" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
-			<div class="hidden" id="hid1">
-			<p>Persamaan tersebut dapat dinyatakan juga dengan</p>
-
-			\[p_1 (x)=a_0 L_0 (x)+a_1 L_1 (x)\]
-
-			<p>Dengan \(a_0=f_0, L_0 (x)=\frac{x-x_1}{x_0-x_1}\)</p>
-			<p>Dan \(a_1=f_1, L_1 (x)=\frac{x-x_0}{x_1-x_0}\)</p>
-
-			<p>Persamaan tersebut merupakan polinom Lagrange derajat satu.</p>
-
-			<center><button type="button" id="btn-hid2" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
-			</div>
-
-			<div class="hidden" id="hid2">
-			<p>Secara umum, bentuk umum polinom Lagrange adalah</p>
-
-			\[
-				p_n (x)=\sum_{i=0}^{n}{a_i L_i (x)}=a_0 L_0 (x)+a_n L_1 (x)+...+a_n L_n (x)
-			\]
-
-			<p>Dengan \(a_i=f_i,i=0,1,2,…,n\)</p>
-
-			<p>dan</p>
-
-			\[
-				L_i (x)=\prod_{
-					\begin{array}{cc}
-						j=0\\
-						j \neq i
-					\end{array}
-				}^{n}{\frac{(x-x_j)}{(x_i-x_j)}}=\frac{(x-x_0 )(x-x_1 )…(x-x_{i-1} )(x-x_{i+1} )...(x-x_n)}{(x_i-x_0 )(x_i-x_1 )...(x_i-x_{i-1} )(x_i-x_{i+1} )…(x_i-x_n)}
-			\]
-
-			<center><button type="button" id="btn-hid3" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
-			</div>
-
-			<div class="hidden" id="hid3">
-
-			<p>Untuk polinom Lagrange berderajat dua bisa didapatkan dengan menjabarkan bentuk umum yaitu</p>
-
-			\[p_2 (x)=a_0 L_0 (x)+a_1 L_1 (x)+a_2 L_2 (x)\]
-
-			<p>kita ketahui bahwa \(n=2\)</p>
-			<p>Untuk mendapatkan \(L_0 (x)\), kita gunakan \(i=0\)</p>
+			<p>Misalkan diberikan data sebagai berikut</p>
 
 			<table class="table table-hover">
 			<tbody>
 				<tr>
-					<td>\(j\)</td>
-					<td>\(i\)</td>
-					<td>\(L_0 (x)\)</td>
-				</tr>
-				<tr>
+					<th scope="row">x</th>
 					<td>0</td>
-					<td>0</td>
-					<td>\(j=i\), maka tidak dihitung</td>
-				</tr>
-				<tr>
 					<td>1</td>
-					<td>0</td>
-					<td>\(\frac{(x-x_1)}{(x_0-x_1 )}\)</td>
+					<td>2</td>
+					<td>2,5</td>
+					<td>3</td>
+					<td>3,5</td>
+					<td>4</td>
 				</tr>
 				<tr>
-					<td>2</td>
+					<th scope="row">y</th>
+					<td>2,5</td>
+					<td>0,5</td>
+					<td>0,5</td>
+					<td>1,5</td>
+					<td>1,5</td>
+					<td>1,125</td>
 					<td>0</td>
-					<td>\(\frac{(x-x_1)(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )}\)</td>
 				</tr>
 			</tbody>
-			</table>
+		</table>
 
-			<p>Didapatkan \(L_0 (x)=\frac{(x-x_1)(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )}\)</p>
+			<p>Metode interpolasi yang paling sederhana adalah dengan menghubungkan titik-titik simpul dengan potongan-potongan garis lurus.</p>
 
-			<center><button type="button" id="btn-hid4" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+			<center><div class="drawing" id="draw1"></div></center>
 
-			</div>
+			<p>Grafik tersebut disebut dengan interpolasi linear sepotong-sepotong, dan fungsi interpolasi yang berpadanan dinyatakan dengan \(l(x)\). Fungsi tersebut bersesuaian dengan data, tetapi grafiknya tidak mulus.</p>
 
-			<div class="hidden" id="hid4">
+			<p>Pilihan interpolasi berikutnya adalah dengan menggunakan interpolasi polinom. Terdapat tujuh titik data, sehingga kita mendapatkan polinom penginterpolasi derajat enam \(P_6 (x)\)</p>
 
-			<p>Dengan menggunakan cara yang sama didapatkan</p>
+			<center><div class="drawing" id="draw2"></div></center>
 
-			\[L_1 (x)=\frac{(x-x_0 )(x-x_2 )}{(x_1-x_0 )(x_1-x_2 )} \]
-			\[L_2 (x)=\frac{(x-x_0 )(x-x_1 )}{(x_2-x_0 )(x_2-x_1 )} \]
+			<p>Grafik yang dihasilkan sangat berlainan dari grafik \(l(x)\). Walaupunn grafiknya mulus, namun terlalu berosilasi diantara titik-titik simpul interpolasi</p>
 
-			<p>Kita juga tahu bahwa \(a_0=f_0,a_1=f_1,a_2=f_2\)</p>
-			<p>Sehingga kita dapatkan persamaan polinom</p>
-			\[
-				p_2 (x)=f_0  \frac{(x-x_1 )(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )} +f_1  \frac{(x-x_0 )(x-x_2 )}{(x_1-x_0 )(x_1-x_2 )} +f_2  \frac{(x-x_0 )(x-x_1 )}{(x_2-x_0 )(x_2-x_1 )}
-			\]
-			<p>Dengan cara yang sama juga bisa kita dapatkan persamaan polinom Lagrange untuk derajat-derajat lainnya</p>
+			<p>Pilihan ketiga adalah menghubungkan titik-titik data dari tabel dengan serangkaian polinom penginterpolasi kuadrat.</p>
 
-			<center><a href="inter2_1.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></a></center>
-			</div>
+			<p>Pada selang \(0&lt;x&lt;4\) kita nyatakan fungsi ini dengan \(q(x)\).</p>
 
-			</div>
+			<center><div class="drawing" id="draw3"></div></center>
+
+			<p>Pada masing-masing selang \([0,2],[2,3]\), dan \([3,4]\), \(q(x)\) berupa polinom kuadrat yang menginterpolasi data pada selang bagian tersebut. </p>
+
+			<center><a href="../fungsi-numerik/index.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></a></center>
 
     </div>
 
@@ -265,7 +200,7 @@
   <script src="../../assets/niceadmin/js/main.js"></script>
   <script src="../../assets/js/svg-intersections.js"></script>
   <script src="../../assets/js/draw.js"></script>
-  <script src="slides/inter2_0.js"></script>
+  <script src="slides/inter2_2.js"></script>
 
 </body>
 

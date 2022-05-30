@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Interpolasi Lanjutan - Bisa Numerik</title>
+  <title>Interpolasi - Bisa Numerik</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -62,7 +62,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="../index.html" class="logo d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center">
         <img src="../../assets/niceadmin/img/logo.png" alt="">
         <span class="d-none d-lg-block">Bisa Numerik</span>
       </a>
@@ -75,30 +75,45 @@
   <aside id="sidebar" class="sidebar">
 
 		<img src="sideimg.png" width="100%"></img>
-		<span class="h3">Interpolasi (Lanjutan)</span>
+		<span class="h3">Interpolasi</span>
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Lagrange</span>
+          <span>Pendahuluan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter2_1.html">
+        <a class="nav-link collapsed" href="inter1_1.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Invers</span>
+          <span>Interpolasi Linear</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="inter2_2.html">
+        <a class="nav-link collapsed" href="inter1_2.html">
           <i class="bi bi-grid"></i>
-          <span>Interpolasi Spline</span>
+          <span>Interpolasi Kuadrat</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="inter1_3.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Selisih-Bagi Newton</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="inter1_4.html">
+          <i class="bi bi-grid"></i>
+          <span>Interpolasi Pada Titik Yang Berjarak Sama</span>
+        </a>
+      </li>
+
 
     </ul>
 
@@ -107,132 +122,48 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Interpolasi Lagrange</h1>
+      <h1>Interpolasi Selisih-Bagi Newton</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Interpolasi Lanjutan</a></li>
-          <li class="breadcrumb-item active">Interpolasi Lagrange</li>
+          <li class="breadcrumb-item"><a href="index.html">Interpolasi</a></li>
+          <li class="breadcrumb-item active">Interpolasi Selisih-Bagi Newton</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <div class="content" >
 
-			<p>Dalam memahami persamaan interpolasi Lagrange, kita ulas kembali persamaan polinom linear</p>
+			<p>Interpolasi linear merupakan interpolasi yang menggunakan garis lurus melalui dua titik \((x_0,f_0 ),(x_1,f_1)\). Interpolasi ini digunakan untuk mendapatkan nilai di antara dua data yang berdasarkan persamaan linear.</p>
 
-			\[p_1 (x)=f_0+\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
-			diurutkan,
-			\[p_1 (x)=f_0+(f_1-f_0)\frac{x-x_0}{x_1-x_0}\]
-			\[p_1 (x)=f_0 (1)+(f_1-f_0 )  \frac{x-x_0}{x_1-x_0}\]
-			substitusi 1 dengan penyebut disebelahnya
-			\[p_1 (x)=f_0\frac{x_1-x_0}{x_1-x_0}+(f_1-f_0 )  \frac{x-x_0}{x_1-x_0}\]
-			asosiasi
-			\[p_1 (x)=f_0 (\frac{x_1-x_0}{x_1-x_0}-\frac{x-x_0}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			\[p_1 (x)=f_0 (\frac{x_1-x_0-x+x_0}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			\[p_1 (x)=f_0 (\frac{x_1-x}{x_1-x_0 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			kalikan dengan \(\frac{-1}{-1}\)
-			\[p_1 (x)=f_0 (\frac{x_1-x}{x_1-x_0 }*\frac{-1}{-1})+f_1  \frac{x-x_0}{x_1-x_0 }\]
-			sehingga didapatkan
-			\[p_1 (x)=f_0 (\frac{x-x_1}{x_0-x_1 })+f_1  \frac{x-x_0}{x_1-x_0 }\]
+			<p>Coba hubungkan titik A dan titik B di bawah ini</p>
 
-			<center><button type="button" id="btn-hid1" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
-			<div class="hidden" id="hid1">
-			<p>Persamaan tersebut dapat dinyatakan juga dengan</p>
-
-			\[p_1 (x)=a_0 L_0 (x)+a_1 L_1 (x)\]
-
-			<p>Dengan \(a_0=f_0, L_0 (x)=\frac{x-x_1}{x_0-x_1}\)</p>
-			<p>Dan \(a_1=f_1, L_1 (x)=\frac{x-x_0}{x_1-x_0}\)</p>
-
-			<p>Persamaan tersebut merupakan polinom Lagrange derajat satu.</p>
-
-			<center><button type="button" id="btn-hid2" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
+			<center><div class="drawing" id="drawing">
+				<div id="map-catcher"></div>
 			</div>
+			<button class="btn btn-secondary" onclick="reSlide('#drawing')"><i class="bi bi-arrow-clockwise"></i></button>
+			</center>
 
-			<div class="hidden" id="hid2">
-			<p>Secara umum, bentuk umum polinom Lagrange adalah</p>
+			<p>Berdasarkan grafik linear tersebut, kita dapat menentukan persamaan linear tersebut dari rumus \(\frac{y-y_1}{y_2-y_1}=\frac{x-x_1}{x_2-x_1}\)</p>
 
-			\[
-				p_n (x)=\sum_{i=0}^{n}{a_i L_i (x)}=a_0 L_0 (x)+a_n L_1 (x)+...+a_n L_n (x)
-			\]
+			<center><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
 
-			<p>Dengan \(a_i=f_i,i=0,1,2,…,n\)</p>
+			<p>Substitusikan \(x,x_0,x_1,f,f_0,f_1\) ke \(x,x_1,x_2,y,y_1,y_2\) secara berurutan.</p>
 
-			<p>dan</p>
+			\[\frac{f-f_0}{f_1-f_0}=\frac{x-x_0}{x_1-x_0}\]
+			\[f-f_0=\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
+			\[f=f_0+\frac{f_1-f_0}{x_1-x_0} (x-x_0 )\]
 
-			\[
-				L_i (x)=\prod_{
-					\begin{array}{cc}
-						j=0\\
-						j \neq i
-					\end{array}
-				}^{n}{\frac{(x-x_j)}{(x_i-x_j)}}=\frac{(x-x_0 )(x-x_1 )…(x-x_{i-1} )(x-x_{i+1} )...(x-x_n)}{(x_i-x_0 )(x_i-x_1 )...(x_i-x_{i-1} )(x_i-x_{i+1} )…(x_i-x_n)}
-			\]
+			<p>\(f\) adalah polinom berderajat satu sehingga bisa dinotasikan sebagai \(p_1 (x)\). Dengan \(f[x_0,x_1]\) adalah beda terbagi pertama yang didefinisikan sebagai berikut</p>
 
-			<center><button type="button" id="btn-hid3" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+			\[f[x_0,x_1 ]=\frac{f_1-f_0}{x_1-x_0}\]
 
-			</div>
+			<p>Sehingga persamaan sebelumnya bisa ditulis ulang menjadi</p>
 
-			<div class="hidden" id="hid3">
+			\[p_1 (x)=f_0+(x-x_0 )f[x_0,x_1 ]\]
 
-			<p>Untuk polinom Lagrange berderajat dua bisa didapatkan dengan menjabarkan bentuk umum yaitu</p>
+			<br/>
 
-			\[p_2 (x)=a_0 L_0 (x)+a_1 L_1 (x)+a_2 L_2 (x)\]
-
-			<p>kita ketahui bahwa \(n=2\)</p>
-			<p>Untuk mendapatkan \(L_0 (x)\), kita gunakan \(i=0\)</p>
-
-			<table class="table table-hover">
-			<tbody>
-				<tr>
-					<td>\(j\)</td>
-					<td>\(i\)</td>
-					<td>\(L_0 (x)\)</td>
-				</tr>
-				<tr>
-					<td>0</td>
-					<td>0</td>
-					<td>\(j=i\), maka tidak dihitung</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>0</td>
-					<td>\(\frac{(x-x_1)}{(x_0-x_1 )}\)</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>0</td>
-					<td>\(\frac{(x-x_1)(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )}\)</td>
-				</tr>
-			</tbody>
-			</table>
-
-			<p>Didapatkan \(L_0 (x)=\frac{(x-x_1)(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )}\)</p>
-
-			<center><button type="button" id="btn-hid4" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
-
-			</div>
-
-			<div class="hidden" id="hid4">
-
-			<p>Dengan menggunakan cara yang sama didapatkan</p>
-
-			\[L_1 (x)=\frac{(x-x_0 )(x-x_2 )}{(x_1-x_0 )(x_1-x_2 )} \]
-			\[L_2 (x)=\frac{(x-x_0 )(x-x_1 )}{(x_2-x_0 )(x_2-x_1 )} \]
-
-			<p>Kita juga tahu bahwa \(a_0=f_0,a_1=f_1,a_2=f_2\)</p>
-			<p>Sehingga kita dapatkan persamaan polinom</p>
-			\[
-				p_2 (x)=f_0  \frac{(x-x_1 )(x-x_2 )}{(x_0-x_1 )(x_0-x_2 )} +f_1  \frac{(x-x_0 )(x-x_2 )}{(x_1-x_0 )(x_1-x_2 )} +f_2  \frac{(x-x_0 )(x-x_1 )}{(x_2-x_0 )(x_2-x_1 )}
-			\]
-			<p>Dengan cara yang sama juga bisa kita dapatkan persamaan polinom Lagrange untuk derajat-derajat lainnya</p>
-
-			<center><a href="inter2_1.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></a></center>
-			</div>
-
-			</div>
+			<center><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
 
     </div>
 
@@ -265,7 +196,7 @@
   <script src="../../assets/niceadmin/js/main.js"></script>
   <script src="../../assets/js/svg-intersections.js"></script>
   <script src="../../assets/js/draw.js"></script>
-  <script src="slides/inter2_0.js"></script>
+  <script src="slides/inter1_1.js"></script>
 
 </body>
 

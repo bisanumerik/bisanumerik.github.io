@@ -26,8 +26,20 @@
   <link href="../../assets/niceadmin/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../../assets/niceadmin/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="../../assets/niceadmin/css/style.css" rel="stylesheet">
+
+  	<!-- Vendorjs -->
+	<script src="../../assets/svgjs/svg.min.js"></script>
+	<script src="../../assets/mathjs/math.js"></script>
+	<script src="../../assets/decimaljs/decimal.js"></script>
+
+  <!-- MathJax -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+	</script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
@@ -37,7 +49,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body onload="initBody()">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -113,7 +125,72 @@
     </div><!-- End Page Title -->
 
     <div>
-			<p><strong>Interpolasi</strong> adalah proses pencarian dan penghitungan pada nilai suatu fungsi yang grafiknya melewati sekumpulan titik yang diberikan.</p>
+		<p>Hasil penelitian/percobaan biasanya berupa data diskrit yang disajikan dalam bentuk tabel.</p>
+
+		<p>Contohnya</p>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Tegangan yang diterapkan (\(x, kg/mm^2\))</th>
+					<th scope="col">Waktu Patah (\(y\), jam)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>5</td>
+					<td>40</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>30</td>
+				</tr>
+				<tr>
+					<td>15</td>
+					<td>25</td>
+				</tr>
+				<tr>
+					<td>20</td>
+					<td>40</td>
+				</tr>
+				<tr>
+					<td>25</td>
+					<td>18</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>Tabel diatas merupakan data hasil pengukuran fisika yang telah dilakukan untuk menentukan hubungan antara tegangan yang diberikan kepada baja tahan-karat (\(x\)) dan waktu yang diperlukan hingga baja tersebut patah (\(y\))</p>
+
+		<center><button type="button" id="btn-hid1" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+
+		<div id="hid1" class="hidden">
+		<p><strong>Persoalan:</strong> Bagaimana cara menentukan nilai y diantara nilai-nilai x tersebut  (misalnya \(x = 7\)) tanpa harus melakukan pengukuran lagi, dan fungsi yang menghubungkan variabel \(y\) dengan variabel \(x\) tidak diketahui?</p>
+
+		<p><strong>Solusi:</strong> mencari fungsi yang mencocokan (<i>fit</i>) titik-titik data didalam tabel <strong>Pencocokan Kurva</strong> (<i>curve fitting</i>)</p>
+
+		<center><button type="button" id="btn-hid2" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+		</div>
+
+		<div id="hid2" class="hidden">
+		<p><strong>Pencocokan Kurva</strong> adalah sebuah metode yang mencocokan titik data dengan sebuah kurva. Metode ini digunakan untuk menghitung nilai fungsi, menghitung nilai turunan dan menghitung nilai integral.</p>
+
+		<p>Salah satu metode pencocokan kurva adalah <strong>Interpolasi</strong>. <strong>Interpolasi</strong> adalah proses pencarian dan penghitungan pada nilai suatu fungsi yang grafiknya melewati sekumpulan titik yang diberikan. Interpolasi mencari nilai-nilai antara yang tidak ada pada data. Biasanya digunakan pada data yang mempunyai ketelitian yang sangat tinggi, sehingga kurva  cocokannya dibuat melalui setiap titik.</p>
+
+		<center><button type="button" id="btn-hid3" onclick="showHidden(this)" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></center>
+		</div>
+
+		<div id="hid3" class="hidden">
+		<center>
+			<div id="draw1" class="drawing"></div>
+			<p>Kurva dari data pengukuran</p>
+			<div id="draw2" class="drawing"></div>
+			<p>Kurva hasil interpolasi</p>
+		</center>
+
+		<center><a href="inter1_1.html"><button type="button" class="btn btn-primary rounded-pill">Lanjut<i class="bx bx-chevron-right"></i></button></i></center>
+		</div>
+
     </div>
 
   </main><!-- End #main -->
@@ -135,17 +212,13 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../../assets/niceadmin/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../../assets/niceadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/niceadmin/vendor/chart.js/chart.min.js"></script>
-  <script src="../../assets/niceadmin/vendor/echarts/echarts.min.js"></script>
   <script src="../../assets/niceadmin/vendor/quill/quill.min.js"></script>
-  <script src="../../assets/niceadmin/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../assets/niceadmin/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../assets/niceadmin/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../../assets/niceadmin/js/main.js"></script>
+  <script src="../../assets/js/draw.js"></script>
+  <script src="slides/inter1_0.js"></script>
 
 </body>
 
